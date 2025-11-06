@@ -1,0 +1,70 @@
+'use strict';
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('stock_adjustments', {
+      id: {
+        type: Sequelize.BIGINT.UNSIGNED,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      warehouse_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'warehouses',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
+      },
+      reason: {
+        type: Sequelize.TEXT
+      },
+      date: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      remarks: {
+        type: Sequelize.TEXT
+      },
+      status: {
+        type: Sequelize.ENUM('Pending','Approved','Rejected'),
+        defaultValue: 'Pending'
+      },
+      created_by: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
+      },
+      approved_by: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        onUpdate: Sequelize.literal('CURRENT_TIMESTAMP')
+      }
+    });
+  },
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('stock_adjustments');
+  }
+};

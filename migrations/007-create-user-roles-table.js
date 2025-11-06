@@ -1,0 +1,50 @@
+'use strict';
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('user_roles', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      role_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'roles',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        onUpdate: Sequelize.literal('CURRENT_TIMESTAMP')
+      }
+    });
+
+    await queryInterface.addConstraint('user_roles', {
+      fields: ['user_id', 'role_id'],
+      type: 'unique',
+      name: 'uq_user_role'
+    });
+  },
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('user_roles');
+  }
+};
