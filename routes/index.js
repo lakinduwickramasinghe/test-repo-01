@@ -32,5 +32,8 @@ router.post('/create-database', async (req, res) => {
   }
 });
 
+router.get('/db-code', async (req, res) => {
+  res.json({ code: "axion-001"});
+});
 
 module.exports = router;

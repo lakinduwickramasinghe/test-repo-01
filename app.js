@@ -6,6 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(async (req, res, next) => {
+  const subdomain = req.headers.host.split('.')[0];
+  console.log(`Subdomain: ${subdomain}`);
+  next();
+});
+
 const routes = require('./routes/index');
 app.use('/api', routes);
 
