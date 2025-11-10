@@ -2,17 +2,17 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('sales_invoice_items', {
+    await queryInterface.createTable('sale_items', {
       id: {
         type: Sequelize.BIGINT.UNSIGNED,
         primaryKey: true,
         autoIncrement: true
       },
-      invoice_id: {
+      sale_id: {
         type: Sequelize.BIGINT.UNSIGNED,
         allowNull: false,
         references: {
-          model: 'sales_invoices',
+          model: 'sales',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -56,6 +56,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('sales_invoice_items');
+    await queryInterface.dropTable('sale_items');
   }
 };

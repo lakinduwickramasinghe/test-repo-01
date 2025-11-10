@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      sales_invoice_id: {
+      sale_id: {
         type: Sequelize.BIGINT.UNSIGNED,
         allowNull: true,
         references: {
-          model: 'sales_invoices',
+          model: 'sales',
           key: 'id'
         },
         onUpdate: 'CASCADE',

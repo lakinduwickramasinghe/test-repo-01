@@ -3,10 +3,6 @@ const router = express.Router();
 const mysql = require('mysql2/promise');
 const runMigrations = require('../utils/runMigrations');
 
-router.get('/', (req, res) => {
-  res.send('API is running');
-});
-
 router.post('/create-database', async (req, res) => {
   const { databaseName } = req.body;
   if (!databaseName) return res.status(400).json({ error: 'Database name required' });
@@ -33,7 +29,7 @@ router.post('/create-database', async (req, res) => {
 });
 
 router.get('/db-code', async (req, res) => {
-  res.json({ code: "axion-001"});
+  res.json({ code: "HansamaleeDB"});
 });
 
 module.exports = router;

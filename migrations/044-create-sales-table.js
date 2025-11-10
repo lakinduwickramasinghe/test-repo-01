@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('sales_invoices', {
+    await queryInterface.createTable('sales', {
       id: {
         type: Sequelize.BIGINT.UNSIGNED,
         primaryKey: true,
@@ -119,6 +119,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('sales_invoices');
+    await queryInterface.dropTable('sales');
   }
 };

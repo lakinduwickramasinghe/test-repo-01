@@ -18,11 +18,11 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      invoice_id: {
+      sale_id: {
         type: Sequelize.BIGINT.UNSIGNED,
         allowNull: false,
         references: {
-          model: 'sales_invoices',
+          model: 'sales',
           key: 'id'
         },
         onUpdate: 'CASCADE',
